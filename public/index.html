@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Operacao WhatsApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="website icon" type="png" href="./img/icone.png">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="brand-block">
+                <span class="brand-kicker">Monitor ao Vivo</span>
+                <h1>Painel de Operacao</h1>
+                <p>WhatsApp, relatorios e automacao acompanhados em tempo real.</p>
+            </div>
+            <div class="topbar-actions">
+                <button id="btn-reconnect" class="btn btn-primary">Reconectar</button>
+                <button id="btn-logout" class="btn btn-secondary">Desconectar</button>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <section class="card hero-card">
+                <div class="hero-copy">
+                    <span class="section-kicker">Execucao Atual</span>
+                    <h2 id="automation-stage">Aguardando automacao</h2>
+                    <p id="automation-message">Nenhuma execucao iniciada.</p>
+                </div>
+                <div class="hero-meta">
+                    <div class="status-chip" id="wa-chip">
+                        <span class="status-dot"></span>
+                        <span id="connection-status">Desconectado</span>
+                    </div>
+                    <div class="status-chip neutral" id="automation-chip">
+                        <span id="automation-status-label">Idle</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Execucao</span>
+                        <strong id="automation-run-id">-</strong>
+                    </div>
+                    <div class="meta-item">
+                        <span>Ultima atualizacao</span>
+                        <strong id="last-updated">-</strong>
+                    </div>
+                    <div class="meta-item">
+                        <span>Sincronia</span>
+                        <strong id="panel-sync-status">Conectando...</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card metrics-card">
+                <div class="card-header">
+                    <div>
+                        <span class="section-kicker">Indicadores</span>
+                        <h3>Resumo da Operacao</h3>
+                    </div>
+                </div>
+                <div class="metrics-grid">
+                    <article class="metric">
+                        <span class="metric-label">Mensagens</span>
+                        <strong class="metric-value" id="count-msg">0</strong>
+                    </article>
+                    <article class="metric">
+                        <span class="metric-label">Arquivos enviados</span>
+                        <strong class="metric-value" id="count-files">0</strong>
+                    </article>
+                    <article class="metric">
+                        <span class="metric-label">Arquivos limpos</span>
+                        <strong class="metric-value" id="count-cleaned">0</strong>
+                    </article>
+                    <article class="metric">
+                        <span class="metric-label">Pendencias</span>
+                        <strong class="metric-value" id="count-pending">0</strong>
+                    </article>
+                    <article class="metric metric-wide">
+                        <span class="metric-label">Clientes processados</span>
+                        <strong class="metric-value" id="count-clients">0 / 0</strong>
+                    </article>
+                    <article class="metric metric-wide">
+                        <span class="metric-label">Representantes</span>
+                        <strong class="metric-value" id="count-reps">0</strong>
+                    </article>
+                </div>
+            </section>
+
+            <section class="card qr-card" id="qr-card">
+                <div class="card-header">
+                    <div>
+                        <span class="section-kicker">Conexao</span>
+                        <h3>WhatsApp do Painel</h3>
+                    </div>
+                </div>
+                <div class="qr-stage" id="qr-stage">
+                    <div id="qr-placeholder" class="qr-placeholder">
+                        <div class="loader"></div>
+                        <span>Aguardando QR Code</span>
+                    </div>
+                    <img id="qr-image" alt="QR Code do WhatsApp">
+                </div>
+                <p class="helper-text" id="qr-caption">Quando o QR aparecer, escaneie para manter o servidor conectado.</p>
+            </section>
+
+            <section class="card process-card">
+                <div class="card-header">
+                    <div>
+                        <span class="section-kicker">Controle</span>
+                        <h3>Controle do Processo</h3>
+                    </div>
+                </div>
+                <div class="process-form">
+                    <label class="field">
+                        <span>Usuario</span>
+                        <input type="text" id="process-user" placeholder="Seu usuario do sistema">
+                    </label>
+                    <label class="field">
+                        <span>Senha</span>
+                        <input type="password" id="process-password" placeholder="Sua senha do sistema">
+                    </label>
+                    <div class="process-actions">
+                        <button id="btn-start-process" class="btn btn-primary">Iniciar processo</button>
+                        <button id="btn-stop-process" class="btn btn-secondary">Parar processo</button>
+                        <p id="start-process-result" class="helper-text">Informe as credenciais e inicie a automacao por aqui.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card actions-card">
+                <div class="card-header">
+                    <div>
+                        <span class="section-kicker">Teste Manual</span>
+                        <h3>Envio Rapido</h3>
+                    </div>
+                </div>
+                <div class="test-form">
+                    <label class="field">
+                        <span>Numero</span>
+                        <input type="text" id="test-number" placeholder="5511999999999">
+                    </label>
+                    <label class="field">
+                        <span>Mensagem</span>
+                        <textarea id="test-message" rows="4" placeholder="Digite uma mensagem de teste..."></textarea>
+                    </label>
+                    <div class="test-actions">
+                        <button id="btn-send-test" class="btn btn-primary">Enviar teste</button>
+                        <p id="send-test-result" class="helper-text">Use este bloco para validar rapido o envio.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card log-card">
+                <div class="card-header">
+                    <div>
+                        <span class="section-kicker">Linha do Tempo</span>
+                        <h3>Eventos da Automacao</h3>
+                    </div>
+                    <button id="btn-clear-events" class="btn btn-secondary btn-small">Limpar eventos</button>
+                </div>
+                <p id="clear-events-result" class="helper-text card-helper">Os novos eventos aparecem aqui conforme a automacao roda.</p>
+                <div id="automation-log-list" class="log-list"></div>
+            </section>
+
+            <section class="card artifacts-card">
+                <div class="card-header">
+                    <div>
+                        <span class="section-kicker">Arquivos Recentes</span>
+                        <h3>Saidas da Execucao</h3>
+                    </div>
+                </div>
+                <div id="artifacts-list" class="artifact-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

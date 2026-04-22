@@ -1,0 +1,16 @@
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+
+auth_info_baileys/
+uploads/
+Relatorios/
+representantes_separados/
+
+server.out.log
+server.err.log
+startup.log
+
+.env
+.env.*
